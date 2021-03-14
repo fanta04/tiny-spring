@@ -1,0 +1,26 @@
+<beans>
+    <bean id="wheel" class="com.fanta.entity.Wheel">
+        <property name="brand" value="Hello"/>
+        <property name="specification" value="HelloWheel"/>
+    </bean>
+
+    <bean id="car" class="com.fanta.entity.Car">
+        <property name="name" value="Tesla"/>
+        <property name="length" value="4m"/>
+        <property name="height" value="1.5m"/>
+        <property name="weight" value="2T"/>
+        <property name="wheel" ref="wheel"/>
+    </bean>
+
+    <bean id="helloService" class="com.fanta.HelloServiceImpl"/>
+
+    <bean id="logInterceptor" class="com.fanta.aop.LogInterceptor"/>
+
+    <bean id="autoProxyCreator" class="com.fanta.aop.AspectJAwareAdvisorAutoProxyCreator"/>
+
+    <bean id="helloServiceAspect" class="com.fanta.aop.AspectJExpressionPointCutAdvisor">
+        <property name="advice" ref="logInterceptor"/>
+        <property name="expression" value="execution(* com.fanta.HelloService.sayHello(..))"/>
+    </bean>
+
+</beans>
